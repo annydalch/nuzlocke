@@ -2,17 +2,26 @@
 
 module.exports = (app, passport) => {
   app.get('/', (req, res) => {
-    res.render('index.pug')
+    res.render('index.pug', {
+      authorized: req.isAuthenticated()
+    })
   })
-  app.get('/login', (req, res) => {
-    res.render('login.pug', { message: req.flash('loginMessage') })
+  app.get('/login', notLoggedIn, (req, res) => {
+    res.render('login.pug', {
+      message: req.flash('loginMessage'),
+      authorized: req.isAuthenticated()
+    })
   })
-  app.get('/signup', (req, res) => {
-    res.render('signup.pug', { message: req.flash('signupMessage') })
+  app.get('/signup', notLoggedIn, (req, res) => {
+    res.render('signup.pug', {
+      message: req.flash('signupMessage'),
+      authorized: req.isAuthenticated()
+    })
   })
   app.get('/profile', isLoggedIn, (req, res) => {
     res.render('profile.pug', {
-      user: req.user
+      user: req.user,
+      authorized: req.isAuthenticated()
     })
   })
   app.get('/logout', (req, res) => {
@@ -38,4 +47,12 @@ const isLoggedIn = (req, res, next) => {
   }
 
   res.redirect('/login')
+}
+
+const notLoggedIn = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    res.redirect('/profile')
+  }
+
+  return next()
 }

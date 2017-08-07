@@ -1,8 +1,12 @@
 #navbar
   ul
+    li
+      a(href='/', class='home-link') Nuzlockejs
     if authorized
       li
         a(href='/profile', class='profile-link') Profile
+      li
+        a(href='/logout', class='logout-link') Log Out
     else
       li
         a(href='/login', class='login-link') Log In
