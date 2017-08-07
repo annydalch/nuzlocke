@@ -2,9 +2,7 @@
 
 module.exports = (app, passport) => {
   app.get('/', (req, res) => {
-    res.render('index.pug', {
-      authorized: req.isAuthenticated()
-    })
+    res.render('index.pug', buildConfig(req))
   })
   app.get('/login', notLoggedIn, (req, res) => {
     res.render('login.pug', {
@@ -13,10 +11,7 @@ module.exports = (app, passport) => {
     })
   })
   app.get('/signup', notLoggedIn, (req, res) => {
-    res.render('signup.pug', {
-      message: req.flash('signupMessage'),
-      authorized: req.isAuthenticated()
-    })
+    res.render('signup.pug', buildConfig(req))
   })
   app.get('/profile', isLoggedIn, (req, res) => {
     res.render('profile.pug', {
@@ -39,6 +34,18 @@ module.exports = (app, passport) => {
     failureRedirect: '/login',
     failureFlash: true
   }))
+}
+
+const buildConfig = (req) => {
+  let authenticated = req.isAuthenticated()
+  let config = {}
+  if (authenticated) {
+    let user = req.user
+    config.user = user
+  } else {
+    config.user = null
+  }
+  return config
 }
 
 const isLoggedIn = (req, res, next) => {

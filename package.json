@@ -36,6 +36,8 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
     "express-session": "^1.15.5",
+    "jstransformer-scss": "^0.1.4",
+    "jstransformer-uglify-js": "^1.2.0",
     "method-override": "^2.3.9",
     "mongoose": "^4.11.5",
     "morgan": "^1.8.2",

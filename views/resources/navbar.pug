@@ -1,14 +1,14 @@
 #navbar
   ul
     li
-      a(href='/', class='home-link') Nuzlockejs
+      a(href='/', class='home-link left') Nuzlockejs
     if authorized
       li
-        a(href='/profile', class='profile-link') Profile
+        a(href='/profile', class='profile-link right') Profile
       li
-        a(href='/logout', class='logout-link') Log Out
+        a(href='/logout', class='logout-link right') Log Out
     else
       li
-        a(href='/login', class='login-link') Log In
+        a(href='/login', class='login-link right') Log In
       li
-        a(href='/signup', class='signup-link') Sign Up
+        a(href='/signup', class='signup-link right') Sign Up
