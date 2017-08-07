@@ -29,7 +29,7 @@ module.exports = passport => {
         } else {
           let newUser = new User()
           newUser.email = email
-          newUser.email = await newUser.generateHash(password)
+          newUser.password = await newUser.generateHash(password)
           newUser.save(err => {
             if (err) throw err
           })

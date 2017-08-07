@@ -1,0 +1,15 @@
+extends resources/page.pug
+
+block title
+        title= region.name + " - Nuzlockejs"
+
+block content
+  table
+    tr
+      th Location
+      th Captured?
+    each location in region.locations
+      tr
+        td= location
+        td
+          input(type='checkbox')

@@ -1,5 +1,7 @@
 'use strict'
 
+const sinnoh = require('../regions/platinum.json')
+
 module.exports = (app, passport) => {
   app.get('/', (req, res) => {
     res.render('index.pug', buildConfig(req))
@@ -13,6 +15,13 @@ module.exports = (app, passport) => {
   app.get('/signup', notLoggedIn, (req, res) => {
     res.render('signup.pug', buildConfig(req))
   })
+
+  app.get('/platinum', isLoggedIn, async (req, res) => {
+    let config = buildConfig(req)
+    config.region = sinnoh
+    res.render('nuzlocke.pug', config)
+  })
+
   app.get('/profile', isLoggedIn, (req, res) => {
     res.render('profile.pug', {
       user: req.user,
