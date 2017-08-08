@@ -1,15 +1,21 @@
 extends resources/page.pug
 
 block title
-        title= region.name + " - Nuzlockejs"
+  title= run.name + " in " + run.game + " - Nuzlockejs"
 
 block content
-  table
-    tr
-      th Location
-      th Captured?
-    each location in region.locations
+  form(action='/run/' + run.id, method='post')
+    table
       tr
-        td= location
-        td
-          input(type='checkbox')
+        th Location
+        th Captured?
+      each location in run.locations
+        tr
+          td= location.name
+          td
+            input(
+               type='checkbox',
+               checked=location.captured,
+               name=location.name
+                 )
+    button(type='submit') Update

@@ -15,12 +15,12 @@ module.exports = passport => {
   })
   passport.use('local-signup', new LocalStrategy(
     {
-      usernameField: 'email',
+      usernameField: 'name',
       passwordField: 'password',
       passReqToCallback: true
     },
-    function (req, email, password, done) {
-      User.findOne({ email: email }, async (err, user) => {
+    function (req, name, password, done) {
+      User.findOne({ name: name }, async (err, user) => {
         if (err) {
           return done(err)
         }
@@ -28,7 +28,7 @@ module.exports = passport => {
           return done(null, false, req.flash('signupMessage', 'That email is already in use'))
         } else {
           let newUser = new User()
-          newUser.email = email
+          newUser.name = name
           newUser.password = await newUser.generateHash(password)
           newUser.save(err => {
             if (err) throw err
@@ -40,12 +40,12 @@ module.exports = passport => {
 
   passport.use('local-login', new LocalStrategy(
     {
-      usernameField: 'email',
+      usernameField: 'name',
       passwordField: 'password',
       passReqToCallback: true
     },
-    function (req, email, password, done) {
-      User.findOne({ email: email }, async (err, user) => {
+    function (req, name, password, done) {
+      User.findOne({ name: name }, async (err, user) => {
         if (err) {
           return done(err)
         }

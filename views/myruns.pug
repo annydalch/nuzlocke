@@ -1,0 +1,10 @@
+extends resources/page.pug
+
+block title
+  title= user.name + "'s runs - Nuzlockejs"
+
+block content
+  ul
+    each run in runs
+      li
+        a(href="/run/" + run.id)= run.name + " in " + run.game

@@ -3,12 +3,22 @@ extends resources/page.pug
 block title
   title Sign Up - Nuzlockejs
 
+block scripts
+  script
+    include scripts/signup.js
+
 block content
-  form(action='/signup' method='post')
+  form(action='/signup' method='post', id='signup-form')
     div(class='form-group')
-      label Email
-      input(type='text', class='form-control', name='email')
+      label Username
+      input(type='text', class='form-control', name='name', id='username', required)
+      span(id='username-error-message', class='error-message')
     div(class='form-group')
       label Password
-      input(type='password', class='form-control', name='password')
+      input(type='password', class='form-control', name='password', id='password', required)
+    div(class='form-group')
+      label Verify password
+      input(type='password', class='form-control', name='verify-password', id='verify-password', required)
+    div(class='form-group')
+      span(id='password-error-message', display='none') Make sure your passwords match!
     button(type='submit', class='btn btn-warning btn-lg') Sign Up

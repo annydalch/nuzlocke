@@ -1,0 +1,16 @@
+extends resources/page.pug
+
+block title
+  title Start a run - Nuzlockejs
+
+block content
+  form(action='/newrun', method='post')
+    div(class='form-group')
+      label Choose a game:
+      select(class='form-select', name='game')
+        each game in games
+          option(value=game)= game
+    div(class='form-group')
+      label Name your run:
+      input(type='text', class='form-control', name='runName')
+    button(type='submit') Create!
