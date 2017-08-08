@@ -5,13 +5,35 @@
   "main": "server.js",
   "scripts": {
     "test": "ava",
-    "lint": "standard",
+    "lint": "standard --verbose | snazzy",
     "dev": "chokidar '**/*.js' -c 'standard && ava'",
-    "validate": "npm ls"
+    "validate": "npm ls",
+    "build": "BABEL_ENV=production babel scripts -d views/scripts",
+    "build-dev": "BABEL_ENV=dev babel scripts -d views/scripts"
   },
   "pre-commit": [
     "lint"
   ],
+  "babel": {
+    "env": {
+      "production": {
+        "presets": [
+          "env",
+          "babili"
+        ],
+        "compact": "true"
+      },
+      "dev": {
+        "presets": [],
+        "compact": "false"
+      }
+    }
+  },
+  "standard": {
+    "ignore": [
+      "/views/scripts"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/annydalch/nuzlocke.git"
@@ -25,10 +47,13 @@
   "homepage": "https://github.com/annydalch/nuzlocke#readme",
   "devDependencies": {
     "ava": "^0.21.0",
+    "babel-cli": "^6.24.1",
+    "babel-preset-babili": "^0.1.4",
+    "babel-preset-env": "^1.6.0",
     "chokidar-cli": "^1.2.0",
     "precommit-hook": "^3.0.0",
-    "standard": "^10.0.2",
-    "uglify-js": "^3.0.27"
+    "snazzy": "^7.0.0",
+    "standard": "^10.0.2"
   },
   "dependencies": {
     "bcrypt": "^1.0.2",

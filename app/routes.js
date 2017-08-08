@@ -1,6 +1,7 @@
 'use strict'
 
 const Run = require('./models/run.js')
+const User = require('./models/user.js')
 const games = require('../regions/regions.json').games
 
 module.exports = (app, passport) => {
@@ -23,6 +24,19 @@ module.exports = (app, passport) => {
       if (err) throw err
       config.runs = runs
       res.render('myruns.pug', config)
+    })
+  })
+
+  app.get('/user-exists-p/:name', (req, res) => {
+    User.findOne({ name: req.params.name }, (err, user) => {
+      if (err) {
+        res.sendStatus(500)
+        throw err
+      } else if (!user) {
+        res.sendStatus(404)
+      } else {
+        res.sendStatus(200)
+      }
     })
   })
 

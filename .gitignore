@@ -4,3 +4,4 @@ config/secret.js
 package-lock.json
 .jshintignore
 .jshintrc
+views/scripts/*

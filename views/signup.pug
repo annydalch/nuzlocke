@@ -8,11 +8,14 @@ block scripts
     include scripts/signup.js
 
 block content
-  form(action='/signup' method='post', id='signup-form')
+  form(action='/signup' method='post', id='signup-form', novalidate)
     div(class='form-group')
       label Username
       input(type='text', class='form-control', name='name', id='username', required)
-      span(id='username-error-message', class='error-message')
+    div(class='form-group')
+      span(id='username-error-none', class='error-message', style='display:none;') You need a username!
+      span(id='username-error-already-exists', class='error-message', style='display:none;') That username already exists.
+      span(id='username-error-bad-chars', class='error-message', style='display:none;') Your username cannot contain the characters #[span(class='code') \ / ^ - [ ] | & ; % @ ' " < > ( ) + ,
     div(class='form-group')
       label Password
       input(type='password', class='form-control', name='password', id='password', required)
@@ -20,5 +23,9 @@ block content
       label Verify password
       input(type='password', class='form-control', name='verify-password', id='verify-password', required)
     div(class='form-group')
-      span(id='password-error-message', display='none') Make sure your passwords match!
-    button(type='submit', class='btn btn-warning btn-lg') Sign Up
+      span(id='password-error-match', class='error-message', style='display:none;') Make sure your passwords match!
+      span(id='password-error-none', class='error-message', style='display:none;') You need a password!
+      span(id='password-error-bad-chars', class='error-message', style='display:none;') Your password cannot contain the characters #[span(class='code') \ / ^ - [ ] | & ; % @ ' " < > ( ) + ,
+    div(class='form-group')
+       span(id='error-null-char', class='error-message', style='display:none') Get out. Your kind aren't welcome here.
+    button(type='button', onclick='submitHandler()', class='btn btn-warning btn-lg') Sign Up
